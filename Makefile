@@ -1,17 +1,15 @@
-CC=g++ -std=c++17
-CFLAGS=-c -Wall
-LDFLAGS=
-SOURCES=src/main.cpp src/game.cpp src/board.cpp src/snake.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=build/game
+CC=g++
+SOURCES=main.cpp src/board.cpp
+LIBS=-lncurses
+BIN=bin/snakegame
 
-all: $(SOURCES) $(EXECUTABLE)
+all: run
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+build: $(SOURCES)
+	$(CC) $(SOURCES) $(LIBS) -o $(BIN)
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+run: build
+	./$(BIN)
 
-clean:
-	rm -f $(EXECUTABLE) $(OBJECTS)
+clear:
+	rm $(BIN)
