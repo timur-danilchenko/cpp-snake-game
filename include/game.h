@@ -4,6 +4,8 @@
 #include <ncurses.h>
 #include "board.h"
 #include "drawable.h" 
+#include "fruit.h"
+#include "empty.h"
 
 class game_t {
 public:
@@ -12,9 +14,11 @@ public:
     void update_state();
     void redraw();
     bool is_over();
+    ~game_t();
 private:
     board_t board;
     bool game_over;
+    fruit_t* fruit;
 };
 
 #endif

@@ -8,13 +8,6 @@ board_t::board_t(int height, int width) {
     construct(height, width);
 }
 
-void board_t::construct(int height, int width) {
-    int x_max, y_max;
-    getmaxyx(stdscr, y_max, x_max);
-
-    board_window = newwin(height, width, (y_max/2) - (height / 2), (x_max/2) - (width / 2));
-}
-
 void board_t::initialize() {
     clear();
     refresh();
@@ -36,6 +29,10 @@ chtype board_t::get_input() {
     return wgetch(board_window);
 } 
 
+void board_t::get_empty_coordinates(int& y, int& x) {
+    while(mvwinch(board_window, y = rand() % height, x = rand() % width) != ' ');
+}
+
 void board_t::clear(){
     wclear(board_window);
     add_border();
@@ -43,4 +40,17 @@ void board_t::clear(){
 
 void board_t::refresh() {
     wrefresh(board_window);
+}
+
+void board_t::construct(int height, int width) {
+    int x_max, y_max;
+    getmaxyx(stdscr, y_max, x_max);
+
+    board_window = newwin(height, width, (y_max/2) - (height / 2), (x_max/2) - (width / 2));
+    this->height = height;
+    this->width = width;
+}
+
+board_t::~board_t() {
+    delete board_window;
 }
