@@ -5,6 +5,7 @@
 
 class board_t{
 public:
+    board_t();
     board_t(int height, int width);
 
     void initialize();
@@ -18,7 +19,8 @@ public:
     void refresh(); // a.k.a. update
 private:
     WINDOW* board_window;
-    int height, width;
+
+    void construct(int height, int width);
 };
 
 #endif

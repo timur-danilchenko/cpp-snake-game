@@ -1,12 +1,18 @@
 #include "../include/board.h"
 
+board_t::board_t() {
+    construct(0, 0);
+}
+
 board_t::board_t(int height, int width) {
+    construct(height, width);
+}
+
+void board_t::construct(int height, int width) {
     int x_max, y_max;
     getmaxyx(stdscr, y_max, x_max);
 
     board_window = newwin(height, width, (y_max/2) - (height / 2), (x_max/2) - (width / 2));
-    this->height = height;
-    this->width = width;
 }
 
 void board_t::initialize() {

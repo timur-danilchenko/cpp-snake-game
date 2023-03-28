@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include "include/board.h"
+#include "include/game.h"
 
 #define BOARD_DIM 17
 #define BOARD_ROWS BOARD_DIM
@@ -9,8 +9,13 @@ int main() {
     initscr();
     refresh();
 
-    board_t board(BOARD_ROWS, BOARD_COLS);
-    board.initialize();
+    game_t game(BOARD_ROWS, BOARD_COLS);
+
+    while(!game.is_over()) {
+        game.process_input();
+        game.update_state();
+        game.redraw();
+    }
 
     getch();
     endwin();
