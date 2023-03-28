@@ -10,6 +10,7 @@ int main() {
     refresh();
 
     board_t board(BOARD_ROWS, BOARD_COLS);
+    board.initialize();
 
     getch();
     endwin();
