@@ -2,6 +2,7 @@
 #define SNAKE_BOARD_H
 
 #include <ncurses.h>
+#include "drawable.h"
 
 class board_t{
 public:
@@ -12,6 +13,7 @@ public:
     
     void add_border();
     void add_at(int y, int x, chtype c);
+    void add(drawable_t drawable);
 
     chtype get_input();
 

@@ -8,7 +8,8 @@
 int main() {
     initscr();
     refresh();
-
+    noecho();
+    
     game_t game(BOARD_ROWS, BOARD_COLS);
 
     while(!game.is_over()) {

@@ -3,6 +3,7 @@
 
 #include <ncurses.h>
 #include "board.h"
+#include "drawable.h" 
 
 class game_t {
 public:

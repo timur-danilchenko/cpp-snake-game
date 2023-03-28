@@ -28,6 +28,10 @@ void board_t::add_at(int y, int x, chtype c) {
     mvwaddch(board_window, y, x, c);
 }
 
+void board_t::add(drawable_t drawable) {
+    add_at(drawable.get_y(), drawable.get_x(), drawable.get_icon());
+}
+
 chtype board_t::get_input() {
     return wgetch(board_window);
 } 

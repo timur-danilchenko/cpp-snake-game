@@ -11,7 +11,7 @@ void game_t::process_input() {
 }
 
 void game_t::update_state() {
-
+    board.add(drawable_t(3, 3, 'S'));
 }
 
 void game_t::redraw() {
