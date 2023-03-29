@@ -33,6 +33,10 @@ void board_t::get_empty_coordinates(int& y, int& x) {
     while(mvwinch(board_window, y = rand() % height, x = rand() % width) != ' ');
 }
 
+void board_t::set_timeout(int timeout) {
+    wtimeout(board_window, timeout);
+}
+
 void board_t::clear(){
     wclear(board_window);
     add_border();
@@ -50,5 +54,6 @@ void board_t::construct(int height, int width) {
     this->height = height;
     this->width = width;
 
-    wtimeout(board_window, 500);
+    set_timeout(500);
+    keypad(board_window, true);
 }
