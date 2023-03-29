@@ -24,6 +24,9 @@ public:
 
     void add_piece(snake_piece_t piece);
     void remove_piece();
+    direction_e get_direction();
+    void set_direction(direction_e direction);
+    snake_piece_t next_head();
 private:
     std::queue<snake_piece_t> pieces;
     direction_e direction;
