@@ -49,4 +49,6 @@ void board_t::construct(int height, int width) {
     board_window = newwin(height, width, (y_max/2) - (height / 2), (x_max/2) - (width / 2));
     this->height = height;
     this->width = width;
+
+    wtimeout(board_window, 500);
 }
