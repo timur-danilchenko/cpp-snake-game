@@ -11,17 +11,12 @@ void game_t::initialize() {
     fruit = NULL;
     srand(time(NULL));
 
-    snake_piece_t next = snake_piece_t(1, 1);
-    board.add(next);
-    snake.add_piece(next);
-
-    next = snake.next_head();
-    board.add(next);
-    snake.add_piece(next);
+    handle_next_piece(snake_piece_t(1, 1));
+    handle_next_piece(snake.next_head());
     
-    next = snake.next_head();
-    board.add(next);
-    snake.add_piece(next);
+    if(!fruit) {
+        create_fruit();
+    }
 }
 
 void game_t::process_input() {
@@ -52,21 +47,11 @@ void game_t::process_input() {
 }
 
 void game_t::update_state() {
+    handle_next_piece(snake.next_head());
+    
     if(!fruit) {
-        int y, x;
-        board.get_empty_coordinates(y, x);
-        fruit = new fruit_t(y, x);
-        board.add(*fruit);
+        create_fruit();
     }
-    snake_piece_t next = snake.next_head();
-    if(next.get_y() != fruit->get_y() && next.get_x() != fruit->get_x()) {
-        int empty_row = snake.tail().get_y();
-        int empty_col = snake.tail().get_x();
-        board.add(empty_t(empty_row, empty_col));
-        snake.remove_piece();
-    }
-    board.add(next);
-    snake.add_piece(next);
 }
 
 void game_t::redraw() {
@@ -79,4 +64,29 @@ bool game_t::is_over() {
 
 game_t::~game_t() {
     delete fruit;
+}
+
+void game_t::create_fruit() {
+    int y, x;
+    board.get_empty_coordinates(y, x);
+    fruit = new fruit_t(y, x);
+    board.add(*fruit);
+}
+
+void game_t::handle_next_piece(snake_piece_t next) {
+    if(fruit && (next.get_y() != fruit->get_y() || next.get_x() != fruit->get_x())) {
+        int empty_row = snake.tail().get_y();
+        int empty_col = snake.tail().get_x();
+        board.add(empty_t(empty_row, empty_col));
+        snake.remove_piece();
+    } else {
+        destroy_fruit();
+    }
+    board.add(next);
+    snake.add_piece(next);   
+}
+
+void game_t::destroy_fruit() {
+    delete fruit;
+    fruit = nullptr;
 }

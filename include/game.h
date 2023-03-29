@@ -22,6 +22,10 @@ private:
     bool game_over;
     fruit_t* fruit;
     snake_t snake;
+
+    void create_fruit();
+    void handle_next_piece(snake_piece_t);
+    void destroy_fruit();
 };
 
 #endif
