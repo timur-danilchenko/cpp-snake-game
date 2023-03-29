@@ -1,16 +1,17 @@
+#include <iostream>
 #include <ncurses.h>
 #include "include/game.h"
 
-#define BOARD_DIM 17
+#define BOARD_DIM 13
 #define BOARD_ROWS BOARD_DIM
-#define BOARD_COLS BOARD_DIM * 2.5
+#define BOARD_COLS BOARD_DIM * 2
 
 int main() {
     initscr();
     refresh();
     noecho();
     curs_set(0);
-    
+
     game_t game(BOARD_ROWS, BOARD_COLS);
 
     while(!game.is_over()) {
@@ -19,7 +20,8 @@ int main() {
         game.redraw();
     }
 
-    getch();
     endwin();
+
+    std::cout << "GAME OVER!\n";
     return 0;
 }
