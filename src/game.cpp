@@ -2,10 +2,26 @@
 
 game_t::game_t(int height, int width) {
     board = board_t(height, width);
+    initialize();
+}
+
+void game_t::initialize() {
     board.initialize();
     game_over = false;
     fruit = NULL;
     srand(time(NULL));
+
+    snake_piece_t next = snake_piece_t(1, 1);
+    board.add(next);
+    snake.add_piece(next);
+
+    next = snake.next_head();
+    board.add(next);
+    snake.add_piece(next);
+    
+    next = snake.next_head();
+    board.add(next);
+    snake.add_piece(next);
 }
 
 void game_t::process_input() {
@@ -13,14 +29,21 @@ void game_t::process_input() {
 }
 
 void game_t::update_state() {
-    int y, x;
-    board.get_empty_coordinates(y, x);
-    if(fruit) {
-        board.add(empty_t(fruit->get_y(), fruit->get_x()));
-        delete fruit;
+    if(!fruit) {
+        int y, x;
+        board.get_empty_coordinates(y, x);
+        fruit = new fruit_t(y, x);
+        board.add(*fruit);
     }
-    fruit = new fruit_t(y, x);
-    board.add(*fruit);
+    snake_piece_t next = snake.next_head();
+    if(next.get_y() != fruit->get_y() && next.get_x() != fruit->get_x()) {
+        int empty_row = snake.tail().get_y();
+        int empty_col = snake.tail().get_x();
+        board.add(empty_t(empty_row, empty_col));
+        snake.remove_piece();
+    }
+    board.add(next);
+    snake.add_piece(next);
 }
 
 void game_t::redraw() {

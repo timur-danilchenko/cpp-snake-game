@@ -6,10 +6,12 @@
 #include "drawable.h" 
 #include "fruit.h"
 #include "empty.h"
+#include "snake.h"
 
 class game_t {
 public:
     game_t(int height, int width);
+    void initialize();
     void process_input();
     void update_state();
     void redraw();
@@ -19,6 +21,7 @@ private:
     board_t board;
     bool game_over;
     fruit_t* fruit;
+    snake_t snake;
 };
 
 #endif
