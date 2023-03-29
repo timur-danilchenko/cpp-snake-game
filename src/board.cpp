@@ -50,7 +50,3 @@ void board_t::construct(int height, int width) {
     this->height = height;
     this->width = width;
 }
-
-board_t::~board_t() {
-    delete board_window;
-}

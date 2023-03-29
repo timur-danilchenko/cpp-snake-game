@@ -22,8 +22,6 @@ public:
 
     void clear();
     void refresh(); // a.k.a. update
-
-    ~board_t();
 private:
     WINDOW* board_window;
     int height, width;
