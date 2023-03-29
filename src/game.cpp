@@ -74,13 +74,22 @@ void game_t::create_fruit() {
 }
 
 void game_t::handle_next_piece(snake_piece_t next) {
-    if(fruit && (next.get_y() != fruit->get_y() || next.get_x() != fruit->get_x())) {
-        int empty_row = snake.tail().get_y();
-        int empty_col = snake.tail().get_x();
-        board.add(empty_t(empty_row, empty_col));
-        snake.remove_piece();
-    } else {
-        destroy_fruit();
+    if (fruit) {
+        switch (board.get_char_at(next.get_y(), next.get_x())) {
+            case 'F': 
+                destroy_fruit();
+                break;
+            case ' ': {
+                int empty_row = snake.tail().get_y();
+                int empty_col = snake.tail().get_x();
+                board.add(empty_t(empty_row, empty_col));
+                snake.remove_piece();
+                break;
+            }
+            default: 
+                game_over = true;
+                break;
+        }
     }
     board.add(next);
     snake.add_piece(next);   
