@@ -6,7 +6,10 @@
 #include "drawable.h"
 
 enum direction_e{
-    up, down, left, right,
+    up = -1,
+    down = 1,
+    left = -2,
+    right = 2
 };
 
 class snake_piece_t: public drawable_t {

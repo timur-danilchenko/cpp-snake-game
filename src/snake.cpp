@@ -27,7 +27,8 @@ direction_e snake_t::get_direction() {
 }
 
 void snake_t::set_direction(direction_e direction) {
-    this->direction = direction;
+    if(this->direction + direction != 0)
+        this->direction = direction;
 }
 
 snake_piece_t snake_t::next_head() {
