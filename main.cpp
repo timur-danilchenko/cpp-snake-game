@@ -9,6 +9,7 @@ int main() {
     initscr();
     refresh();
     noecho();
+    curs_set(0);
     
     game_t game(BOARD_ROWS, BOARD_COLS);
 
