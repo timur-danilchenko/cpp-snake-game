@@ -1,11 +1,11 @@
 #include "../include/board.h"
 
 board_t::board_t() {
-    construct(0, 0);
+    construct(0, 0, 500);
 }
 
-board_t::board_t(int height, int width) {
-    construct(height, width);
+board_t::board_t(int height, int width, int speed) {
+    construct(height, width, speed);
 }
 
 void board_t::initialize() {
@@ -41,6 +41,14 @@ chtype board_t::get_char_at(int y, int x) {
     return mvwinch(board_window, y, x);
 }
 
+int board_t::get_start_row() {
+    return start_row;
+}
+
+int board_t::get_start_col() {
+    return start_col;
+}
+
 void board_t::clear(){
     wclear(board_window);
     add_border();
@@ -50,14 +58,16 @@ void board_t::refresh() {
     wrefresh(board_window);
 }
 
-void board_t::construct(int height, int width) {
+void board_t::construct(int height, int width, int speed) {
     int x_max, y_max;
     getmaxyx(stdscr, y_max, x_max);
 
-    board_window = newwin(height, width, (y_max/2) - (height / 2), (x_max/2) - (width / 2));
+    start_row = (y_max/2) - (height / 2);
+    start_col = (x_max/2) - (width / 2);
+    board_window = newwin(height, width, start_row, start_col);
     this->height = height;
     this->width = width;
 
-    set_timeout(500);
+    set_timeout(speed);
     keypad(board_window, true);
 }
