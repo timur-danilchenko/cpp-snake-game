@@ -26,6 +26,29 @@ void game_t::initialize() {
 
 void game_t::process_input() {
     chtype input = board.get_input();
+
+    switch (input)
+    {
+    case KEY_UP:
+    case 'w':
+        snake.set_direction(up);
+        break;
+    case KEY_DOWN:
+    case 's':
+        snake.set_direction(down);
+        break;
+    case KEY_LEFT:
+    case 'a':
+        snake.set_direction(left);
+        break;
+    case KEY_RIGHT:
+    case 'd':
+        snake.set_direction(right);
+        break;
+    case 'p':
+        while(board.get_input() != 'p');
+        break;
+    }
 }
 
 void game_t::update_state() {
