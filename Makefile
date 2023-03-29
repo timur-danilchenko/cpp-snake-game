@@ -1,5 +1,5 @@
 CC=g++
-SOURCES=main.cpp src/board.cpp src/game.cpp src/drawable.cpp src/fruit.cpp src/empty.cpp
+SOURCES=main.cpp src/*.cpp
 LIBS=-lncurses
 BIN=bin/snakegame
 
