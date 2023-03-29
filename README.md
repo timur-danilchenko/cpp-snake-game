@@ -11,7 +11,7 @@ This is a Snake game written in C++. It uses the ncurses library for rendering t
 
 To build the game, run the following commands:
 ```
-make
+make build
 ```
 
 This will compile the source code and create an executable file called `snakegame` in the `build` directory.
@@ -20,7 +20,7 @@ This will compile the source code and create an executable file called `snakegam
 
 To start the game, run the following command:
 ```
-./build/game
+make run
 ```
 
 This will start the game and display the game board in the terminal.
