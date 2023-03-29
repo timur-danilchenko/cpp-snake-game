@@ -37,6 +37,10 @@ void board_t::set_timeout(int timeout) {
     wtimeout(board_window, timeout);
 }
 
+chtype board_t::get_char_at(int y, int x) {
+    return mvwinch(board_window, y, x);
+}
+
 void board_t::clear(){
     wclear(board_window);
     add_border();

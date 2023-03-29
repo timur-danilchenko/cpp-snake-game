@@ -20,6 +20,7 @@ public:
     chtype get_input();
     void get_empty_coordinates(int& y, int &x);
     void set_timeout(int timeout);
+    chtype get_char_at(int y, int x); 
 
     void clear();
     void refresh(); // a.k.a. update
